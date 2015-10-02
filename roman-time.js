@@ -59,7 +59,9 @@ function drawRomanTime(romanTime) {
     var len = romanTime.length;
     for (var i = 0; i < 5; i++) {
         var string = '';
-        for (var j = 0; j < len; j++) string += getRomanSign(romanTime[j], i);
+        for (var j = 0; j < len; j++) {
+            string += getRomanSign(romanTime[j], i);
+        }
         console.log(string + '\n');
     }
 
