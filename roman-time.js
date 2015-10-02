@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
 
 var hours = parseInt(process.argv[2], 10);
 var minutes = parseInt(process.argv[3], 10);
-
 if (hours < 0 || hours > 23) {
     console.log('Время указано не верно. Вы указали ' + hours + ' часов. Но диапазон часов от 0 до 23');
-} else if (minutes < 0 && minutes > 60) {
-    console.log('Время указано не верно. Вы указали ' + minutes + ' минут. Но диапазон часов от 0 до 59');
+} else if (minutes < 0 || minutes > 59) {
+    console.log('Время указано не верно. Вы указали ' + minutes + ' минут. Но диапазон минут от 0 до 59');
+} else if (isNaN(hours) || isNaN(minutes)) {
+    console.log('Один из аргументов не является десятичным числом');
 } else {
     var romanHours = convertToRoman(hours);
     var romanMinutes = convertToRoman(minutes);
     var romanTime = romanHours + ':' + romanMinutes;
-
     console.log(romanTime);
     drawRomanTime(romanTime);
 }
@@ -21,7 +21,7 @@ function convertToRoman(arabicValue) {
         return 'N';
     }
     var romanValue = '';
-        if (arabicValue >= 50) {
+    if (arabicValue >= 50) {
         romanValue += 'L';
         arabicValue -= 50;
     }
@@ -59,9 +59,7 @@ function drawRomanTime(romanTime) {
     var len = romanTime.length;
     for (var i = 0; i < 5; i++) {
         var string = '';
-        for (var j = 0; j < len; j++) {
-            string += getRomanSign(romanTime[j], i);
-        }
+        for (var j = 0; j < len; j++) string += getRomanSign(romanTime[j], i);
         console.log(string + '\n');
     }
 
